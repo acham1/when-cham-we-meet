@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>When Cham We Meet</title>
+    <script>
+      // Handle GitHub Pages SPA redirect from 404.html
+      (function() {
+        var q = Object.fromEntries(new URLSearchParams(window.location.search));
+        if (q.p) {
+          var url = q.p + (q.q ? q.q : '') + (q.h ? q.h : '');
+          window.history.replaceState(null, '', url || '/');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
