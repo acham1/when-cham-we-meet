@@ -9,8 +9,8 @@
       (function() {
         var q = Object.fromEntries(new URLSearchParams(window.location.search));
         if (q.p) {
-          var url = q.p + (q.q ? q.q : '') + (q.h ? q.h : '');
-          window.history.replaceState(null, '', url || '/');
+          var url = '/' + q.p + (q.q ? q.q : '') + (q.h ? q.h : '');
+          window.history.replaceState(null, '', url);
         }
       })();
     </script>

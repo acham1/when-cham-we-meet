@@ -7,8 +7,8 @@
       var search = window.location.search;
       var hash = window.location.hash;
       window.location.replace(
-        window.location.origin + '/when-cham-we-meet/' +
-        '?p=' + encodeURIComponent(path.replace('/when-cham-we-meet/', '')) +
+        window.location.origin + '/' +
+        '?p=' + encodeURIComponent(path.slice(1)) +
         (search ? '&q=' + encodeURIComponent(search) : '') +
         (hash ? '&h=' + encodeURIComponent(hash) : '')
       );
