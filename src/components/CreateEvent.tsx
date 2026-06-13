@@ -153,7 +153,7 @@ export default function CreateEvent() {
             {creating
               ? 'Creating...'
               : USE_FIREBASE && !user
-                ? 'Sign in & create'
+                ? 'Admin login & create'
                 : 'Create event'}
           </button>
         </div>

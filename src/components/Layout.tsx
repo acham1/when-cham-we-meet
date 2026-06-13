@@ -42,7 +42,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                   onClick={() => signIn()}
                   className="text-sm font-medium text-emerald-600 hover:text-emerald-700"
                 >
-                  Sign in
+                  Admin login
                 </button>
               )}
             </div>
