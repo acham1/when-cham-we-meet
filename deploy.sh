@@ -10,9 +10,12 @@ set -euo pipefail
 #   4. Create a Firebase web app, add its config values to config.yaml
 #   5. Add when-cham-we-meet.alanch.am as an authorized domain in Firebase Auth settings
 #   6. Restrict the Firebase API key in GCP Console → APIs & Services → Credentials:
-#      - API restrictions → Restrict to: Identity Toolkit API, Cloud Firestore API
+#      - API restrictions → Restrict to: Identity Toolkit API, Cloud Firestore API, Token Service API
 #      - This prevents abuse if other APIs (e.g. Gemini) are enabled on the project
 #      - See: https://trufflesecurity.com/blog/google-api-keys-werent-secrets-but-then-gemini-changed-the-rules
+#   7. Create the admin allowlist in Firestore:
+#      - Add a doc at config/admins with an "emails" array field
+#      - Add email addresses of users allowed to create events
 
 CONFIG_FILE="config.yaml"
 

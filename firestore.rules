@@ -1,12 +1,21 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified
+        && request.auth.token.email in get(/databases/$(database)/documents/config/admins).data.emails;
+    }
+
+    match /config/{doc} {
+      allow read: if false;
+    }
+
     match /events/{eventId} {
       allow read;
-      allow create: if request.auth != null && request.auth.token.admin == true;
+      allow create: if isAdmin();
 
       match /responses/{responseId} {
-        // Anyone can read, create, or update responses (no auth required)
         allow read, create, update;
       }
     }
