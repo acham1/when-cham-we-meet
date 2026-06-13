@@ -21,6 +21,7 @@ export default function CreateEvent() {
   const [dates, setDates] = useState<string[]>([])
   const [startHour, setStartHour] = useState(9)
   const [endHour, setEndHour] = useState(17)
+  const [slotMinutes, setSlotMinutes] = useState(60)
   const [creating, setCreating] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -45,7 +46,7 @@ export default function CreateEvent() {
         dates: [...dates].sort(),
         startHour,
         endHour,
-        slotMinutes: 30,
+        slotMinutes,
         createdAt: Date.now(),
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         createdBy: currentUser?.uid,
@@ -96,6 +97,22 @@ export default function CreateEvent() {
               What dates might work?
             </label>
             <Calendar selectedDates={dates} onChange={setDates} />
+          </div>
+
+          <div>
+            <label htmlFor="slot-size" className="block text-sm font-medium text-gray-700">
+              Time slot size
+            </label>
+            <select
+              id="slot-size"
+              value={slotMinutes}
+              onChange={e => setSlotMinutes(Number(e.target.value))}
+              className="mt-1.5 w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+            >
+              <option value={15}>15 minutes</option>
+              <option value={30}>30 minutes</option>
+              <option value={60}>1 hour</option>
+            </select>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
