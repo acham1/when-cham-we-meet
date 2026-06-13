@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect, useState } from 'react'
-import { generateTimeSlots, formatTime, formatDateShort, slotKey, useMediaQuery } from '../lib/utils'
+import { generateTimeSlots, formatTime, formatDateLong, slotKey, useMediaQuery } from '../lib/utils'
 
 interface Props {
   dates: string[]
@@ -10,7 +10,7 @@ interface Props {
   onChange: (slots: Set<string>) => void
 }
 
-const MIN_COL_WIDTH = 80
+const MIN_COL_WIDTH = 130
 
 export default function AvailabilityGrid({
   dates,
@@ -130,9 +130,9 @@ export default function AvailabilityGrid({
             </svg>
           </button>
           <span className="text-sm font-semibold text-gray-900">
-            {formatDateShort(dates[activeDayIndex])}
+            {formatDateLong(dates[activeDayIndex])}
             <span className="ml-1.5 text-xs font-normal text-gray-400">
-              {activeDayIndex + 1}/{dates.length}
+              {activeDayIndex + 1} of {dates.length}
             </span>
           </span>
           <button
@@ -158,11 +158,35 @@ export default function AvailabilityGrid({
               <div />
               {visibleDates.map(date => (
                 <div key={date} className="py-2 text-center text-xs font-semibold text-gray-700">
-                  {formatDateShort(date)}
+                  {formatDateLong(date)}
                 </div>
               ))}
             </div>
           )}
+
+          {/* All day / Clear buttons */}
+          <div
+            className="grid border-b border-gray-200 bg-gray-50"
+            style={{ gridTemplateColumns }}
+          >
+            <div />
+            {visibleDates.map(date => (
+              <div key={date} className="flex gap-1 px-1 py-1.5">
+                <button
+                  onClick={() => selectAllDay(date)}
+                  className="flex-1 rounded bg-gray-200/70 px-1 py-1 text-[11px] font-medium text-gray-600 transition-colors hover:bg-gray-300 active:bg-gray-400"
+                >
+                  All day
+                </button>
+                <button
+                  onClick={() => clearDay(date)}
+                  className="flex-1 rounded bg-gray-200/70 px-1 py-1 text-[11px] font-medium text-gray-600 transition-colors hover:bg-gray-300 active:bg-gray-400"
+                >
+                  Clear
+                </button>
+              </div>
+            ))}
+          </div>
 
           {/* Time grid */}
           <div
@@ -202,29 +226,6 @@ export default function AvailabilityGrid({
             ))}
           </div>
 
-          {/* All day / Clear buttons */}
-          <div
-            className="grid border-t border-gray-200 bg-gray-50"
-            style={{ gridTemplateColumns }}
-          >
-            <div />
-            {visibleDates.map(date => (
-              <div key={date} className="flex gap-1 px-1 py-1.5">
-                <button
-                  onClick={() => selectAllDay(date)}
-                  className="flex-1 rounded bg-gray-200/70 px-1 py-1 text-[11px] font-medium text-gray-600 transition-colors hover:bg-gray-300 active:bg-gray-400"
-                >
-                  All day
-                </button>
-                <button
-                  onClick={() => clearDay(date)}
-                  className="flex-1 rounded bg-gray-200/70 px-1 py-1 text-[11px] font-medium text-gray-600 transition-colors hover:bg-gray-300 active:bg-gray-400"
-                >
-                  Clear
-                </button>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>

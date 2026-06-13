@@ -27,6 +27,11 @@ export function formatDateShort(dateStr: string): string {
   return date.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' })
 }
 
+export function formatDateLong(dateStr: string): string {
+  const date = new Date(dateStr + 'T12:00:00')
+  return date.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long' })
+}
+
 export function generateId(length = 8): string {
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
   const array = new Uint8Array(length)

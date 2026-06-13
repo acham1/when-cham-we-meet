@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { generateTimeSlots, formatTime, formatDateShort, slotKey, useMediaQuery } from '../lib/utils'
+import { generateTimeSlots, formatTime, formatDateLong, slotKey, useMediaQuery } from '../lib/utils'
 import type { ResponseData } from '../lib/types'
 
 interface Props {
@@ -80,9 +80,9 @@ export default function GroupView({ dates, startHour, endHour, slotMinutes, resp
             </svg>
           </button>
           <span className="text-sm font-semibold text-gray-900">
-            {formatDateShort(dates[activeDayIndex])}
+            {formatDateLong(dates[activeDayIndex])}
             <span className="ml-1.5 text-xs font-normal text-gray-400">
-              {activeDayIndex + 1}/{dates.length}
+              {activeDayIndex + 1} of {dates.length}
             </span>
           </span>
           <button
@@ -107,7 +107,7 @@ export default function GroupView({ dates, startHour, endHour, slotMinutes, resp
               <div />
               {visibleDates.map(date => (
                 <div key={date} className="py-2 text-center text-xs font-semibold text-gray-700">
-                  {formatDateShort(date)}
+                  {formatDateLong(date)}
                 </div>
               ))}
             </div>
@@ -172,7 +172,7 @@ export default function GroupView({ dates, startHour, endHour, slotMinutes, resp
       {selectedSlot && (
         <div className="mt-3 rounded-lg border border-gray-200 bg-white p-3">
           <div className="text-xs font-medium text-gray-700">
-            {formatDateShort(selectedSlot.split('T')[0])} at{' '}
+            {formatDateLong(selectedSlot.split('T')[0])} at{' '}
             {formatTime(selectedSlot.split('T')[1])}
           </div>
           <div className="mt-1.5 text-xs text-gray-500">
