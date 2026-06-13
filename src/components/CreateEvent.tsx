@@ -54,7 +54,7 @@ export default function CreateEvent() {
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : String(e)
       if (msg.includes('permission')) {
-        setError('Your account is not authorized to create events.')
+        setError('Your account is not authorized to create events. Contact the site owner to become an admin.')
       } else {
         setError('Something went wrong. Please try again.')
       }
