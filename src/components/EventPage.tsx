@@ -92,6 +92,8 @@ export default function EventPage() {
         responseIdRef.current = matchByName.id
         localStorage.setItem(`w2m:${id}:rid`, matchByName.id)
         setSelectedSlots(new Set(matchByName.slots))
+      } else if (responseIdRef.current) {
+        doSave(selectedSlots)
       }
     }
   }
