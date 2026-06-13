@@ -5,9 +5,9 @@ gcp:
   project: when-cham-we-meet
 
 firebase:
-  api_key: ""
-  auth_domain: ""
-  project_id: ""
-  storage_bucket: ""
-  messaging_sender_id: ""
-  app_id: ""
+  api_key: "AIzaSyCc2bPxY7LyKaaIkCjwMq9QIG98RoarKTA"
+  auth_domain: "when-cham-we-meet.firebaseapp.com"
+  project_id: "when-cham-we-meet"
+  storage_bucket: "when-cham-we-meet.firebasestorage.app"
+  messaging_sender_id: "261446724651"
+  app_id: "1:261446724651:web:91e03102eea65d6d82ce6e"
