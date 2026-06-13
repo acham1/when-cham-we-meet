@@ -14,7 +14,27 @@ export function formatTime(time: string): string {
   const [h, m] = time.split(':').map(Number)
   const period = h >= 12 ? 'PM' : 'AM'
   const hour = h % 12 || 12
-  return m === 0 ? `${hour} ${period}` : `${hour}:${m.toString().padStart(2, '0')} ${period}`
+  return `${hour}:${m.toString().padStart(2, '0')} ${period}`
+}
+
+export function formatTimeRange(time: string, slotMinutes: number): string {
+  const [h, m] = time.split(':').map(Number)
+  const totalMin = h * 60 + m + slotMinutes
+  const endH = Math.floor(totalMin / 60) % 24
+  const endM = totalMin % 60
+
+  const startPeriod = h >= 12 ? 'PM' : 'AM'
+  const endPeriod = endH >= 12 ? 'PM' : 'AM'
+  const startHour = h % 12 || 12
+  const endHour = endH % 12 || 12
+
+  const startStr = m === 0 ? `${startHour}` : `${startHour}:${m.toString().padStart(2, '0')}`
+  const endStr = endM === 0 ? `${endHour}` : `${endHour}:${endM.toString().padStart(2, '0')}`
+
+  if (startPeriod === endPeriod) {
+    return `${startStr}–${endStr} ${endPeriod}`
+  }
+  return `${startStr} ${startPeriod}–${endStr} ${endPeriod}`
 }
 
 export function formatDate(dateStr: string): string {

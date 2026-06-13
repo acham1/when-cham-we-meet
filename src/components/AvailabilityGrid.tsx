@@ -44,10 +44,10 @@ export default function AvailabilityGrid({
   const visibleDates = isMobile ? [dates[activeDayIndex]] : dates
 
   const gridTemplateColumns = isMobile
-    ? '72px 1fr'
-    : `72px repeat(${visibleDates.length}, 1fr)`
+    ? '100px 1fr'
+    : `100px repeat(${visibleDates.length}, 1fr)`
 
-  const minWidth = isMobile ? undefined : 72 + visibleDates.length * MIN_COL_WIDTH
+  const minWidth = isMobile ? undefined : 100 + visibleDates.length * MIN_COL_WIDTH
 
   const getCellKey = useCallback((x: number, y: number): string | null => {
     const el = document.elementFromPoint(x, y)
@@ -203,7 +203,10 @@ export default function AvailabilityGrid({
                   }`}
                   style={{ height: isMobile ? 44 : 32 }}
                 >
-                  {time.endsWith(':00') ? formatTime(time) : ''}
+                  <span>{formatTime(time)}</span>
+                  <span className="ml-0.5 text-[10px] text-gray-300">
+                    {slotMinutes >= 60 ? `(${slotMinutes / 60}hr)` : `(${slotMinutes}m)`}
+                  </span>
                 </div>
                 {visibleDates.map(date => {
                   const key = slotKey(date, time)
