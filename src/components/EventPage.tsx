@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import AvailabilityGrid from './AvailabilityGrid'
 import GroupView from './GroupView'
+import { useAuth } from '../lib/auth'
 import { fetchEvent, saveResponse, subscribeToResponses } from '../lib/store'
 import { generateId } from '../lib/utils'
 import type { EventData, ResponseData } from '../lib/types'
@@ -10,6 +11,7 @@ type Tab = 'yours' | 'group'
 
 export default function EventPage() {
   const { id } = useParams<{ id: string }>()
+  const { user } = useAuth()
   const [event, setEvent] = useState<EventData | null>(null)
   const [responses, setResponses] = useState<ResponseData[]>([])
   const [name, setName] = useState('')
@@ -41,6 +43,8 @@ export default function EventPage() {
     if (savedName) {
       setName(savedName)
       setNameConfirmed(true)
+    } else if (user?.displayName) {
+      setName(user.displayName)
     }
     if (savedRid) responseIdRef.current = savedRid
   }, [id])
