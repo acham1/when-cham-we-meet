@@ -22,11 +22,13 @@ export default function CreateEvent() {
   const [startHour, setStartHour] = useState(9)
   const [endHour, setEndHour] = useState(17)
   const [creating, setCreating] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const canCreate = name.trim().length > 0 && dates.length > 0 && startHour < endHour
 
   const handleCreate = async () => {
     if (!canCreate || creating) return
+    setError(null)
 
     let currentUser = user
     if (USE_FIREBASE && !currentUser) {
@@ -49,6 +51,13 @@ export default function CreateEvent() {
         createdBy: currentUser?.uid,
       })
       navigate(`/event/${id}`)
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e)
+      if (msg.includes('permission')) {
+        setError('Your account is not authorized to create events.')
+      } else {
+        setError('Something went wrong. Please try again.')
+      }
     } finally {
       setCreating(false)
     }
@@ -129,6 +138,12 @@ export default function CreateEvent() {
               </select>
             </div>
           </div>
+
+          {error && (
+            <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-800">
+              {error}
+            </div>
+          )}
 
           <button
             onClick={handleCreate}
