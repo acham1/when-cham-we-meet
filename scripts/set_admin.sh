@@ -9,17 +9,20 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
-UID="$1"
+USER_UID="$1"
 PROJECT="when-cham-we-meet"
 
-echo "==> Setting admin claim for UID: $UID"
+echo "==> Setting admin claim for UID: $USER_UID"
+
+ACCESS_TOKEN=$(gcloud auth print-access-token)
 
 curl -s -X POST \
-  "https://identitytoolkit.googleapis.com/v1/accounts:update" \
-  -H "Authorization: Bearer $(gcloud auth print-access-token --project=$PROJECT)" \
+  "https://identitytoolkit.googleapis.com/v1/accounts:update?key=unused" \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "X-Goog-User-Project: $PROJECT" \
   -H "Content-Type: application/json" \
   -d "{
-    \"localId\": \"$UID\",
+    \"localId\": \"$USER_UID\",
     \"customAttributes\": \"{\\\"admin\\\": true}\"
   }" | python3 -c "import sys,json; r=json.load(sys.stdin); print('Done.' if 'localId' in r else f'Error: {r}')"
 

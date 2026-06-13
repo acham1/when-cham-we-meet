@@ -4,6 +4,8 @@
 gcp:
   project: when-cham-we-meet
 
+# Firebase client config is public by design — it ships in every browser bundle.
+# The key is restricted to Firestore + Identity Toolkit + securetoken only.
 firebase:
   api_key: "AIzaSyCc2bPxY7LyKaaIkCjwMq9QIG98RoarKTA"
   auth_domain: "when-cham-we-meet.firebaseapp.com"
