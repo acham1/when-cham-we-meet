@@ -1,18 +1,13 @@
 # config.yaml
-# Non-sensitive configuration for When Cham We Meet.
-# Sensitive values (Firebase client config) live in GCP Secret Manager
-# and are injected at build time via deploy.sh.
-
-site:
-  name: When Cham We Meet
-  description: Find a time that works for everyone
+# Configuration for When Cham We Meet.
 
 gcp:
-  project: your-gcp-project-id
-  region: us-central1
-  secret_name: when2meet-env
+  project: when-cham-we-meet
 
-defaults:
-  slot_minutes: 30
-  start_hour: 9
-  end_hour: 17
+firebase:
+  api_key: ""
+  auth_domain: ""
+  project_id: ""
+  storage_bucket: ""
+  messaging_sender_id: ""
+  app_id: ""

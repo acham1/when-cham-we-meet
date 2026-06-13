@@ -2,10 +2,8 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /events/{eventId} {
-      // Anyone can read events (they need the link)
       allow read;
-      // Only authenticated users can create events
-      allow create: if request.auth != null;
+      allow create: if request.auth != null && request.auth.token.admin == true;
 
       match /responses/{responseId} {
         // Anyone can read, create, or update responses (no auth required)

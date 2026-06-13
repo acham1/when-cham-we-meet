@@ -10,8 +10,8 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-gray-50">
       <header className="border-b border-gray-100 bg-white">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
-          <Link to="/" className="text-lg font-bold tracking-tight text-gray-900">
-            When Cham We Meet
+          <Link to="/" className="flex items-center gap-2">
+            <img src="/logo.png" alt="When Cham We Meet" className="h-10" />
           </Link>
           {USE_FIREBASE && !loading && (
             <div className="flex items-center gap-3">
